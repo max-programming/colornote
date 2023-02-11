@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Usman-Sabuwala-s-workspace-u2kcvd.eu-west-1.xata.sh/db/Colornote",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
