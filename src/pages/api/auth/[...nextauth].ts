@@ -1,6 +1,6 @@
 import { XataClient } from '@/xata';
 import { XataAdapter } from '@next-auth/xata-adapter';
-import NextAuth from 'next-auth';
+import NextAuth, { AuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import { compare } from 'bcryptjs';
@@ -12,7 +12,7 @@ const loginSchema = z.object({
   password: z.string(),
 });
 
-export default NextAuth({
+export const authOptions: AuthOptions = {
   adapter: XataAdapter(client),
   providers: [
     Credentials({
@@ -42,4 +42,6 @@ export default NextAuth({
   },
   session: { strategy: 'jwt' },
   secret: 'super secret string',
-});
+};
+
+export default NextAuth(authOptions);

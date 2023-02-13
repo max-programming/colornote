@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next-auth/xata-adapter": "^0.2.2",
+    "@next-fetch/swr": "^0.0.2",
     "@next/font": "13.1.6",
     "@types/node": "18.13.0",
     "@types/react": "18.0.27",
@@ -24,6 +25,7 @@
     "next-auth": "^4.19.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "swr": "^2.0.3",
     "typescript": "4.9.5",
     "zod": "^3.20.6"
   },
