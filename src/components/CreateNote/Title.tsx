@@ -1,14 +1,15 @@
 'use client';
 
-import { noteAtom } from '@/atoms';
+import { noteAtom, titleAtom } from '@/atoms';
 import { colorVariants } from '@/constants';
 import { SwatchIcon } from '@heroicons/react/24/outline';
-import { useAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { createPortal } from 'react-dom';
 import ColorModal from './ColorModal';
 
 export default function Title() {
-  const [{ color, title }, setNote] = useAtom(noteAtom);
+  const { color, title } = useAtomValue(noteAtom);
+  const setTitle = useSetAtom(titleAtom);
 
   const inputBorder = {
     yellow: 'input-warning',
@@ -24,9 +25,7 @@ export default function Title() {
         placeholder='Title goes here'
         className={`input input-bordered ${inputBorder[color]} text-3xl input-lg w-full`}
         value={title}
-        onChange={e =>
-          setNote(prevNote => ({ ...prevNote, title: e.target.value }))
-        }
+        onChange={e => setTitle(e.target.value)}
       />
       <label
         htmlFor='color'

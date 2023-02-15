@@ -1,10 +1,11 @@
 'use client';
 
-import { noteAtom } from '@/atoms';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { contentAtom, noteAtom } from '@/atoms';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 export default function Content() {
-  const [{ color, content }, setNote] = useAtom(noteAtom);
+  const { color, content } = useAtomValue(noteAtom);
+  const setContent = useSetAtom(contentAtom);
 
   const textareaBorder = {
     yellow: 'textarea-warning',
@@ -19,9 +20,7 @@ export default function Content() {
         placeholder='Write down the note in here'
         className={`textarea ${textareaBorder[color]} w-full text-2xl p-5`}
         value={content}
-        onChange={e =>
-          setNote(prevNote => ({ ...prevNote, content: e.target.value }))
-        }
+        onChange={e => setContent(e.target.value)}
       />
     </div>
   );

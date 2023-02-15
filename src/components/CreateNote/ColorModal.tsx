@@ -1,11 +1,11 @@
 'use client';
 
-import { noteAtom } from '@/atoms';
+import { colorAtom } from '@/atoms';
 import { borderVariants, colorVariants, NoteColor } from '@/constants';
 import { useSetAtom } from 'jotai/react';
 
 export default function ColorModal() {
-  const setNote = useSetAtom(noteAtom);
+  const setColor = useSetAtom(colorAtom);
 
   return (
     <div id='colorModal'>
@@ -19,9 +19,7 @@ export default function ColorModal() {
               <ColorChoice
                 color={color}
                 key={color}
-                changeColor={(color: NoteColor) =>
-                  setNote(prevNote => ({ ...prevNote, color }))
-                }
+                changeColor={(color: NoteColor) => setColor(color)}
               />
             ))}
           </div>
