@@ -37,6 +37,21 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    session({ session, token }) {
+      // session.accessToken = token.accessToken;
+      session.user.id = token.id;
+
+      return session;
+    },
+    jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = user?.id;
+      }
+      return token;
+    },
+  },
   pages: {
     signIn: '/login',
   },

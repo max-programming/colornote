@@ -10,11 +10,13 @@ export default async function getNotes(
   res: NextApiResponse
 ) {
   const session = await getServerSession(req, res, authOptions);
+  console.log(session);
 
   if (!session) return res.status(400);
 
   const notes = await client.db.notes
     .filter({ 'userId.email': session.user?.email })
+    .sort('createdAt', 'desc')
     .getAll();
 
   res.json(notes);

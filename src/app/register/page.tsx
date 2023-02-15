@@ -26,7 +26,7 @@ export default function Register() {
   }
 
   return (
-    <div className='container mx-auto mt-5'>
+    <>
       <div className='my-5 card w-full bg-base-200 shadow-xl p-10'>
         <h1 className='text-4xl font-bold text-center mb-10'>Register</h1>
         <form onSubmit={handleSubmit}>
@@ -61,6 +61,6 @@ export default function Register() {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 }

@@ -75,6 +75,12 @@ const tables = [
       { name: "content", type: "text", notNull: true, defaultValue: "" },
       { name: "color", type: "string", notNull: true, defaultValue: "yellow" },
       { name: "userId", type: "link", link: { table: "nextauth_users" } },
+      {
+        name: "createdAt",
+        type: "datetime",
+        notNull: true,
+        defaultValue: "2023-02-16T04:36:19.076Z",
+      },
     ],
   },
 ] as const;

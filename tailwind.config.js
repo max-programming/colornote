@@ -4,10 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        yellow: '#f1fa8c',
-        red: '#ff5555',
-        green: '#50fa7b',
-        blue: '#8be9fd',
+        dracula: {
+          yellow: '#f1fa8c',
+          red: '#ff5555',
+          green: '#50fa7b',
+          blue: '#8be9fd',
+        },
       },
     },
   },

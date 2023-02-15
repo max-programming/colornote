@@ -1,5 +1,4 @@
 {
-  "formatVersion": "",
   "tables": [
     {
       "name": "nextauth_users",
@@ -10,10 +9,6 @@
         },
         {
           "name": "password",
-          "type": "text"
-        },
-        {
-          "name": "avatar",
           "type": "text"
         },
         {
@@ -154,6 +149,42 @@
           "link": {
             "table": "nextauth_users"
           }
+        }
+      ]
+    },
+    {
+      "name": "notes",
+      "columns": [
+        {
+          "name": "title",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "Untitled"
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "notNull": true,
+          "defaultValue": ""
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "yellow"
+        },
+        {
+          "name": "userId",
+          "type": "link",
+          "link": {
+            "table": "nextauth_users"
+          }
+        },
+        {
+          "name": "createdAt",
+          "type": "datetime",
+          "notNull": true,
+          "defaultValue": "now"
         }
       ]
     }

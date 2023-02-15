@@ -2,6 +2,7 @@
 
 import useSWR from 'swr';
 import { Notes } from '@/xata';
+import { colorVariants, NoteColor } from '@/constants';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -13,7 +14,7 @@ export default function NotesDisplay() {
       {!notes ? (
         <p>loading...</p>
       ) : (
-        <div className='grid grid-cols-4 gap-16'>
+        <div className='grid grid-cols-4 gap-10'>
           {notes.map(note => (
             <SingleNote note={note} key={note.id} />
           ))}
@@ -26,7 +27,7 @@ export default function NotesDisplay() {
 function SingleNote({ note }: { note: Notes }) {
   return (
     <div
-      className={`card w-96 bg-${note.color} ${
+      className={`card ${colorVariants[note.color as NoteColor]} ${
         note.color === 'red' ? 'text-white' : 'text-primary-content'
       }`}
     >
