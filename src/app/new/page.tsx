@@ -20,11 +20,13 @@ export default function NewPage() {
       setIsLoading(true);
       const { data } = await axios.post('/api/notes/create', note);
       if (!data.success) {
-        toast('Could not create todo...');
+        toast.error('Could not create todo...');
       } else {
         router.push('/');
         setNote({ color: 'yellow', content: '', title: '' });
       }
+    } catch (e) {
+      toast.error('Could not create todo...');
     } finally {
       setIsLoading(false);
     }
