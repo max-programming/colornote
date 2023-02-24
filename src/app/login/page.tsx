@@ -1,29 +1,38 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
-// import axios from 'axios';
+import { FormEvent, useEffect, useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { toast, Toaster } from 'react-hot-toast';
 
 export default function Login() {
-  const router = useRouter();
+  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  let initialized = false;
+
+  useEffect(() => {
+    if (!initialized) {
+      initialized = true;
+      if (!searchParams) return;
+      if (searchParams.get('error') === 'CredentialsSignin') {
+        console.log('hi');
+        toast.error('Invalid credentials');
+      }
+    }
+  }, []);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setIsLoading(true);
     await signIn('credentials', { email, password, callbackUrl: '/' });
-    // const res = await axios.post('/api/auth/register', { email, password });
     setIsLoading(false);
-    // if ('user' in res.data) {
-    //   router.push('/');
-    // }
   }
 
   return (
     <>
+      <Toaster />
       <div className='my-5 card w-full bg-base-200 shadow-xl p-10'>
         <h1 className='text-4xl font-bold text-center mb-10'>Login</h1>
         <form onSubmit={handleSubmit}>
