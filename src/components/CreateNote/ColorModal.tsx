@@ -1,7 +1,7 @@
 'use client';
 
 import { colorAtom } from '@/atoms';
-import { borderVariants, colorVariants, NoteColor } from '@/constants';
+import { borderVariants, bgColorVariants, NoteColor } from '@/constants';
 import { useSetAtom } from 'jotai/react';
 
 export default function ColorModal() {
@@ -43,7 +43,7 @@ function ColorChoice({
 }) {
   return (
     <div
-      className={`w-44 cursor-pointer h-44 border-8 ${borderVariants[color]} ${colorVariants[color]} rounded-md`}
+      className={`w-44 cursor-pointer h-44 border-8 ${borderVariants[color]} ${bgColorVariants[color]} rounded-md`}
       onClick={() => changeColor(color)}
     ></div>
   );

@@ -2,8 +2,25 @@
 import { PlusIcon } from '@heroicons/react/24/outline';
 import NotesDisplay from '@/components/Notes';
 import Link from 'next/link';
+import { getXataClient } from '@/xata';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { Session } from 'next-auth';
 
-export default function Home() {
+async function getAllNotes(session: Session) {
+  const client = getXataClient();
+  const notes = await client.db.notes
+    .filter({ 'userId.email': session.user?.email })
+    .sort('createdAt', 'desc')
+    .getAll();
+  return notes;
+}
+
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  if (!session) return <div></div>;
+  const notes = await getAllNotes(session);
+
   return (
     <>
       <h1 className='text-4xl font-bold'>Colornote</h1>
@@ -14,7 +31,7 @@ export default function Home() {
           </button>
         </Link>
         {/* <Greet /> */}
-        <NotesDisplay />
+        <NotesDisplay notes={notes} />
       </div>
     </>
   );

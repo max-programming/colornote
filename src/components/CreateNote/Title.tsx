@@ -1,7 +1,7 @@
 'use client';
 
 import { noteAtom, titleAtom } from '@/atoms';
-import { colorVariants } from '@/constants';
+import { bgColorVariants } from '@/constants';
 import { SwatchIcon } from '@heroicons/react/24/outline';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { createPortal } from 'react-dom';
@@ -29,7 +29,7 @@ export default function Title() {
       />
       <label
         htmlFor='color'
-        className={`cursor-pointer w-16 h-16 rounded-md flex justify-center items-center ${colorVariants[color]}`}
+        className={`cursor-pointer w-16 h-16 rounded-md flex justify-center items-center ${bgColorVariants[color]}`}
       >
         <SwatchIcon
           className={`w-8 h-8 ${

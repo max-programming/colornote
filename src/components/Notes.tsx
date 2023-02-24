@@ -1,13 +1,18 @@
 'use client';
 
-import useSWR from 'swr';
-import { Notes } from '@/xata';
-import { colorVariants, NoteColor } from '@/constants';
+import { Notes, NotesRecord } from '@/xata';
+import { bgColorVariants, NoteColor } from '@/constants';
+import Link from 'next/link';
+import { SelectedPick } from '@xata.io/client';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
-export default function NotesDisplay() {
-  const { data: notes } = useSWR<Notes[]>('/api/notes/get', fetcher);
+export default function NotesDisplay({
+  notes,
+}: {
+  notes: Readonly<SelectedPick<NotesRecord, ['*']>>[];
+}) {
+  // const { data: notes } = useSWR<Notes[]>('/api/notes/get', fetcher);
 
   return (
     <div className='mt-10'>
@@ -16,7 +21,9 @@ export default function NotesDisplay() {
       ) : (
         <div className='grid grid-cols-4 gap-10'>
           {notes.map(note => (
-            <SingleNote note={note} key={note.id} />
+            <Link href={`/note/${note.id}`} key={note.id}>
+              <SingleNote note={note} />
+            </Link>
           ))}
         </div>
       )}
@@ -27,7 +34,7 @@ export default function NotesDisplay() {
 function SingleNote({ note }: { note: Notes }) {
   return (
     <div
-      className={`card ${colorVariants[note.color as NoteColor]} ${
+      className={`card ${bgColorVariants[note.color as NoteColor]} ${
         note.color === 'red' ? 'text-white' : 'text-primary-content'
       }`}
     >
